@@ -39,13 +39,21 @@ function renderShell(){
   document.querySelectorAll('.stagger').forEach(group=>{[...group.children].forEach((el,i)=>el.style.setProperty('--i',i));staggerObserver.observe(group)});
   document.querySelectorAll('[data-facebook]').forEach(a=>a.href=SITE_CONFIG.facebookUrl);
 
+  // Give image-heavy and interactive content a smooth reveal throughout every page.
+  document.querySelectorAll('main section:not(.hero) .media-card, main section:not(.hero) .project, main section:not(.hero) .location, main section:not(.hero) .info-card, main section:not(.hero) .btn').forEach((el,i)=>{
+    if(!el.classList.contains('reveal') && !el.parentElement?.classList.contains('stagger')){
+      el.classList.add('motion-in');
+      el.style.setProperty('--motion-delay',`${Math.min((i%6)*70,350)}ms`);
+      motionObserver.observe(el);
+    }
+  });
+
   const form=document.querySelector('#contact-form');
   if(form){
     form.action=SITE_CONFIG.formEndpoint;
     form.addEventListener('submit',e=>{
       if(SITE_CONFIG.formEndpoint.includes('YOUR_FORM_ID')){
         e.preventDefault();
-        const email=encodeURIComponent(SITE_CONFIG.email);
         const name=encodeURIComponent(form.name.value||'Website enquiry');
         const message=encodeURIComponent(form.message.value||'Please contact me regarding your services.');
         window.location.href=`mailto:${SITE_CONFIG.email}?subject=${name}&body=${message}`;
@@ -57,6 +65,7 @@ function renderShell(){
 
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
 const staggerObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');staggerObserver.unobserve(e.target)}}),{threshold:.12});
+const motionObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('motion-visible');motionObserver.unobserve(e.target)}}),{threshold:.08});
 
 function updateScrollEffects(){
   const max=document.documentElement.scrollHeight-window.innerHeight;
