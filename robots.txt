@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tendaiwm77.github.io/kalm-ntg-architects/sitemap.xml
