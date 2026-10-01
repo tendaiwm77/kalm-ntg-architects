@@ -105,26 +105,3 @@ body{background:#fff}
 img {
   image-orientation: from-image;
 }
-
-/* Scroll-controlled 3D construction journey */
-.construction-journey{height:360vh;background:#f1eee7;position:relative}
-.construction-sticky{position:sticky;top:0;height:100vh;min-height:650px;overflow:hidden;background:radial-gradient(circle at 68% 42%,#fffdf8 0%,#f1eee7 55%,#ded9cf 100%)}
-.construction-3d{position:absolute;inset:0;z-index:1}
-.construction-canvas{width:100%;height:100%;display:block}
-.construction-stage-copy{position:absolute;z-index:4;left:0;right:0;top:50%;transform:translateY(-50%);pointer-events:none}
-.construction-stage-copy h2{font-size:clamp(2.7rem,6vw,6.2rem);max-width:560px;margin:10px 0 12px;letter-spacing:-.055em}
-.construction-stage-copy p{max-width:430px;font-size:1.05rem;color:#4f5660}
-.construction-stage-copy small{display:block;margin-top:18px;color:#777;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800}
-.construction-eyebrow{display:block;color:var(--burgundy);margin-bottom:8px}
-.construction-stage-number{font-family:'Manrope';font-size:.8rem;font-weight:800;letter-spacing:.18em;color:#8b0d28}
-.construction-progress{width:210px;height:2px;background:#d2cdc3;margin-top:28px;overflow:hidden}
-.construction-progress span{display:block;width:25%;height:100%;background:var(--burgundy);transform-origin:left}
-@media(max-width:760px){
- .construction-journey{height:300vh}
- .construction-stage-copy{top:18%;transform:none;padding-top:10px}
- .construction-stage-copy h2{font-size:clamp(2.2rem,12vw,3.8rem);max-width:320px}
- .construction-stage-copy p{max-width:310px;font-size:.9rem}
- .construction-stage-copy small{font-size:.58rem}
- .construction-3d{top:24%;height:76%}
-}
-@media(prefers-reduced-motion:reduce){.construction-journey{height:100vh}.construction-stage-copy{position:absolute}}
