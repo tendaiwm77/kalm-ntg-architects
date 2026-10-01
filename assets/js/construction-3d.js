@@ -140,7 +140,7 @@ const stageEl=document.querySelector('[data-construction-stage]');
 
 function setPartState(obj,p){
   const stage=obj.userData.stage ?? 0;
-  const reveal=Math.min(Math.max(((p*4)-stage)/.72,0),1);
+  const reveal=Math.min(Math.max(((p*4)-stage+.18)/.72,0),1);
   const eased=1-Math.pow(1-reveal,3);
   if(obj.isGroup && obj.userData.baseY!==undefined){
     obj.visible=eased>.01;
