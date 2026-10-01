@@ -100,3 +100,8 @@ body{background:#fff}
 @media(max-width:760px){
  .brand img{width:160px}.project-meta{grid-template-columns:1fr}.project-gallery,.related-projects{grid-template-columns:1fr}.project-gallery figure:first-child{grid-column:auto}.project-gallery img,.project-gallery figure:first-child img{height:330px}.project-detail-hero{min-height:650px}.project-detail-content{padding-top:120px}.director-photo{min-height:330px}.project-filter{margin-bottom:28px}
 }
+
+/* Preserve the intended upright orientation of photographs using their embedded EXIF orientation metadata. */
+img {
+  image-orientation: from-image;
+}
