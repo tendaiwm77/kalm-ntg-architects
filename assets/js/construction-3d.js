@@ -160,6 +160,7 @@ function resize(){
 window.addEventListener('resize',resize,{passive:true}); resize();
 
 let scrollProgress=0;
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function readProgress(){
   const section=mount.closest('.construction-journey');
   if(!section)return;
@@ -167,7 +168,7 @@ function readProgress(){
   const range=Math.max(section.offsetHeight-window.innerHeight,1);
   scrollProgress=Math.min(Math.max(-r.top/range,0),1);
 }
-window.addEventListener('scroll',readProgress,{passive:true}); readProgress();
+if(!reduceMotion) window.addEventListener('scroll',readProgress,{passive:true}); readProgress();
 
 const clock=new THREE.Clock();
 function animate(){
@@ -181,6 +182,8 @@ function animate(){
   camera.position.z += (targetZ-camera.position.z)*.04;
   camera.lookAt(0,2.4,0);
   if(labelEl){
+    const bar=document.querySelector('.construction-progress span');
+    if(bar) bar.style.transform=`scaleX(${Math.max(.02,p)})`;
     const idx=Math.min(Math.floor(p*4),3);
     labelEl.textContent=labels[idx][1];
     descEl.textContent=labels[idx][2];
