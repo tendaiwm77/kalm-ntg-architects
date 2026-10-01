@@ -14,9 +14,12 @@ const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
 camera.position.set(8.8, 6.3, 10.5);
 
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.12;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
@@ -137,8 +140,7 @@ const stageEl=document.querySelector('[data-construction-stage]');
 
 function setPartState(obj,p){
   const stage=obj.userData.stage ?? 0;
-  const d=obj.userData.delay||0;
-  const reveal=Math.min(Math.max((p-(stage-0.15+d))/.48,0),1);
+  const reveal=Math.min(Math.max(((p*4)-stage)/.72,0),1);
   const eased=1-Math.pow(1-reveal,3);
   if(obj.isGroup && obj.userData.baseY!==undefined){
     obj.visible=eased>.01;
@@ -174,12 +176,12 @@ const clock=new THREE.Clock();
 function animate(){
   requestAnimationFrame(animate);
   const p=scrollProgress;
-  const stage=Math.min(p*4,3.999);
+  const stage=p*4;
   parts.forEach(o=>setPartState(o,stage));
   model.rotation.y = -0.42 + p*Math.PI*1.72;
   model.rotation.x = .01 + Math.sin(p*Math.PI)*.035;
-  const targetZ=10.5-p*.8;
-  camera.position.z += (targetZ-camera.position.z)*.04;
+  const targetZ=12.8-p*.9;
+  camera.position.z += (targetZ-camera.position.z)*.045;
   camera.lookAt(0,2.4,0);
   if(labelEl){
     const bar=document.querySelector('.construction-progress span');
