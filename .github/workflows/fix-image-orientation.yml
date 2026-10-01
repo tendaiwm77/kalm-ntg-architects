@@ -25,7 +25,7 @@ jobs:
             assets/images/makaunyane-clinic.jpg \
             assets/images/project-roofing.jpg
           do
-            magick "$f" -rotate 90 -strip "$f"
+            convert "$f" -rotate 90 -strip "$f"
           done
       - name: Commit corrected images
         run: |
