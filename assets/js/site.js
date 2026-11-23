@@ -1,4 +1,4 @@
-const SITE_CONFIG={facebookUrl:'https://www.facebook.com/profile.php?id=61594772277377',formEndpoint:'',email:'kalmntgarch@gmail.com',phones:['073 152 4714','076 317 9459','+263 78 966 6475']};
+const SITE_CONFIG={facebookUrl:'https://www.facebook.com/profile.php?id=61594772277377',formEndpoint:'https://formsubmit.co/kalmntgarch@gmail.com',email:'kalmntgarch@gmail.com',phones:['073 152 4714','076 317 9459','+263 78 966 6475']};
 const navItems=[['index.html','Home'],['about.html','About'],['services.html','Services'],['projects.html','Projects'],['locations.html','Locations'],['contact.html','Contact']];
 function renderShell(){
  const page=document.body.dataset.page||'home';
